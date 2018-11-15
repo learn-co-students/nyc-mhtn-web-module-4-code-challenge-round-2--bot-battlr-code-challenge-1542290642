@@ -5,6 +5,11 @@ const BotSpecs = props => {
 
   let botType;
 
+  this.addAndGoBack = (bot) => {
+    props.addBotToYourBots(bot)
+    props.displayAllAgain()
+  }
+
   switch (bot.bot_class) {
     case "Assault":
       botType = <i className="icon large circular military" />;
@@ -61,7 +66,7 @@ const BotSpecs = props => {
             <button
               className="ui button fluid"
               onClick={() =>
-                console.log('connect this to a function that shows all bots')
+                props.displayAllAgain()
               }
             >
               Go Back
@@ -69,9 +74,7 @@ const BotSpecs = props => {
             <button
               className="ui button fluid"
               onClick={() =>
-                console.log(
-                  "connect this to a function that adds this bot to your bot army list"
-                )
+                this.addAndGoBack(props.bot)
               }
             >
               Enlist
