@@ -9,7 +9,8 @@ class BotsPage extends React.Component {
     super()
     this.state = {
       allBots: [],
-      currentBotId: null
+      yourBots: [],
+      currentBotId: null,
     }
   }
 
@@ -23,11 +24,13 @@ class BotsPage extends React.Component {
         <BotCollection
           allBots={this.state.allBots}
           handleBotClick={this.handleBotClick}
-          currentBotId= {this.state.currentBotId}/>
+          currentBotId= {this.state.currentBotId}
+          />
         <YourBotArmy
           allBots={this.state.allBots}
           handleBotClick={this.handleBotClick}
-          currentBotId= {this.state.currentBotId}/>
+          currentBotId= {this.state.currentBotId}
+          yourBots={this.state.yourBots}/>
       </div>
     );
   }
@@ -44,11 +47,26 @@ class BotsPage extends React.Component {
   }
 
   handleBotClick = (event, id) => {
-    console.log('in click handler')
-    this.setState({
-      currentBotId: id
-    }, () => console.log(this.state.currentBotId))
+    if (this.state.currentBotId !== id) {
+      const foundBot =  this.findBot(id)
+      console.log('in click handler')
+      this.setState({
+        currentBotId: id,
+        yourBots: [...this.state.yourBots, foundBot]
+      }, () =>  console.log(this.state))
+    }
   }
+
+  findBot = (id) => {
+    // debugger
+    return this.state.allBots.find(bot => id === bot.id)
+  }
+
+  removeBot = () => {
+
+  }
+
+
 
 } // end of class
 
