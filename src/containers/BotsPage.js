@@ -14,6 +14,33 @@ class BotsPage extends React.Component {
     }
   }
 
+  addExpandToBot = () => {
+    const allBots = this.state.bots.map(bot => {
+      return {...bot, expanded: false}
+    })
+    this.setState({
+      bots: allBots
+    }, () => {
+      console.log(this.state.bots);
+    })
+  }
+
+  toggleExpand = (theBot) => {
+    //all state in undefined here, so this function doesn't work. WIP.
+    const allTheBots = this.state.bots.map(bot => {
+      if (theBot.id === bot.id) {
+        return {...bot, expanded: true}
+      }
+    })
+    debugger
+    this.setState({
+      bots: allTheBots
+    }, () => {
+      console.log(this.state.bots);
+    })
+  }
+
+
   addMyBots = (bot) => {
     if (!this.state.myBots.includes(bot)) {
       const myNewBots = this.state.myBots.concat(bot)
@@ -46,7 +73,7 @@ class BotsPage extends React.Component {
       this.setState({
         bots: json
       }, () => {
-        console.log(this.state.bots);
+        this.addExpandToBot()
       })
     })
   }
@@ -57,7 +84,8 @@ class BotsPage extends React.Component {
         <YourBotArmy myBots={this.state.myBots}
         removeBot={this.removeBot}/>
         <BotCollection bots={this.state.bots}
-        addMyBots={this.addMyBots}/>
+        addMyBots={this.addMyBots}
+        toggleExpand={this.toggleExpand.bind(this)}/>
       </div>
     );
   }

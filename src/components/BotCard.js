@@ -1,7 +1,7 @@
 import React from "react";
 
 const BotCard = props => {
-  const { bot, addMyBots, removeBot } = props;
+  const { bot, addMyBots, removeBot, toggleExpand } = props;
   // console.log(bot, addMyBots, removeBot);
 
   let botType;
@@ -22,7 +22,9 @@ const BotCard = props => {
 
   const onBotClick = () => {
     if (addMyBots) {
-      return addMyBots(bot)
+      // return addMyBots(bot)
+      return toggleExpand(bot)
+      return
     } else {
       return removeBot(bot)
     }
