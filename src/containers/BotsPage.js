@@ -1,12 +1,29 @@
 import React from "react";
 import BotCollection from "./BotCollection"
 import YourBotArmy from "./YourBotArmy"
+import BotSpecs from "../components/BotSpecs"
 
 class BotsPage extends React.Component {
   //start here with your code for step one
   state = {
     bots: [],
-    yourBots: []
+    yourBots: [],
+    currentBot: '',
+    display: 'all',
+    selectedBot: ''
+  }
+
+  getSelectedBot = (bot) => {
+    this.setState({
+      selectedBot: bot,
+      display: 'bot'
+    })
+  }
+
+  displayAllAgain = () => {
+    this.setState({
+      display: 'all'
+    })
   }
 
 
@@ -39,15 +56,24 @@ class BotsPage extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-      <YourBotArmy yourBots={this.state.yourBots} removeBotFromYourBots={this.removeBotFromYourBots} changeClicked={this.changeClicked}/>
+    if (this.state.display === 'all') {
+      return (
+        <div>
+        <YourBotArmy yourBots={this.state.yourBots} removeBotFromYourBots={this.removeBotFromYourBots} changeClicked={this.changeClicked}/>
 
-      <BotCollection bots={this.state.bots} addBotToYourBots={this.addBotToYourBots} removeBotFromYourBots={this.removeBotFromYourBots}
-      yourBots={this.state.yourBots}/>
-      </div>
-    );
-  }
+        <BotCollection bots={this.state.bots} addBotToYourBots={this.addBotToYourBots} removeBotFromYourBots={this.removeBotFromYourBots}
+        yourBots={this.state.yourBots} getSelectedBot={this.getSelectedBot}/>
+        </div>
+      )} else {
+        return (
+          <div>
+          <YourBotArmy yourBots={this.state.yourBots} removeBotFromYourBots={this.removeBotFromYourBots} changeClicked={this.changeClicked}/>
+            <BotSpecs bot={this.state.selectedBot} displayAllAgain={this.displayAllAgain} addBotToYourBots={this.addBotToYourBots}/>
+          </div>
+        )
+      }
+    }
+
 
 }
 

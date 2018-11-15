@@ -10,7 +10,7 @@ class BotCollection extends React.Component {
     		<div className="row">
     		  {
             this.props.bots.map(
-              botObj => <BotCard key={botObj.id} bot={botObj} clickFunction={this.props.addBotToYourBots}
+              botObj => <BotCard key={botObj.id} bot={botObj} clickFunction={this.props.getSelectedBot}
               />
             )
           }
