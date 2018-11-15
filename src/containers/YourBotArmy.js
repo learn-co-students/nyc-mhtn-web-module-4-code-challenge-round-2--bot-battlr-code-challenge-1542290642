@@ -4,19 +4,55 @@ import BotCard from "../components/BotCard";
 class YourBotArmy extends React.Component {
   //your bot army code here...
 
+  // constructor() {
+  //   super()
+  //   this.state = {
+  //
+  //   }
+  // }
+
+  makeBot = () => {
+    // debugger
+    if (this.props.allBots.length > 0 && this.props.yourBots.length > 0 && this.props.currentBotId){
+      return this.props.yourBots.map(bot => {
+        console.log(bot)
+        return <BotCard key={bot.id} bot={bot} handleBotClick={this.props.handleBotClick}/>
+      })
+    } else {
+      return null
+    }
+  }
+
+  // findBot = () => {
+  //   // debugger
+  //   return this.props.allBots.find(bot => this.props.currentBotId === bot.id)
+  // }
+
+  // setYourBots = (newBot) => {
+  //   this.setState({
+  //     yourBots: [...this.state.yourBots, newBot]
+  //   }, () => {
+  //     console.log(this.state.yourBots)
+  //     return this.state.yourBots.map(bot => {
+  //       return <BotCard key={bot.id} bot={bot} handleBotClick={this.props.handleBotClick}/>
+  //   })
+  //   })
+  // }
+
+
   render(){
     return (
       <div className="ui segment inverted olive bot-army">
         <div className="ui five column grid">
           <div className="row bot-army-row">
-            {/*...and here...*/}
+            {this.makeBot()}
             Your Bot Army
           </div>
         </div>
       </div>
     );
   }
-  
-};
+
+}// end of class
 
 export default YourBotArmy;
